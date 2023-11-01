@@ -12,7 +12,7 @@
         header {
             background-color: #54C6FF;
             color: #fff;
-            text-align: left; /* Alignment to left */
+            text-align: left; /* Changed alignment to left */
             padding: 20px;
         }
         h1 {
@@ -53,9 +53,13 @@
         }
         .content {
             padding-left: 20px; /* Added padding to the left */
+            border-left: 1px solid #ddd; /* Faint grey line */
         }
         h2 {
             font-size: 24px; /* Reduced font size */
+        }
+        .center-hr {
+            text-align: center;
         }
     </style>
 </head>
@@ -65,8 +69,10 @@
     </header>
     <div class="container">
         <div class="content">
-            <p>Have unruly internet? Maybe you live in CONCORD, MA where you have negative download speed?</p>
-            <h2>Look no further!</h2>
+            <p>Have unruly internet? Maybe you live in *Concord, ma* where you have negative download speed??</p>
+            <h3><i>Look no further!</i></h3>
+        </div>
+        <div class="center-hr"> <!-- Center-align the horizontal line -->
             <hr> <!-- Horizontal line -->
         </div>
         <!-- OST Widget code start -->
