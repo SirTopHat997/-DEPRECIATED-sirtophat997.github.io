@@ -67,6 +67,24 @@
             text-align: center;
         }
     </style>
+    <script>
+        function getUserIP() {
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const ip = data.ip;
+                    const city = data.city;
+                    const region = data.region;
+                    const country = data.country_name;
+                    const location = `${city}, ${region}, ${country}`;
+                    document.getElementById('user-ip').innerText = `Your IP Address: ${ip}`;
+                    document.getElementById('user-location').innerText = `Your Public Location: ${location}`;
+                })
+                .catch(error => {
+                    console.error('Error fetching IP data: ', error);
+                });
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -76,6 +94,11 @@
         <div class="content">
             <p>Is your internet feeling slow? Are you in *Concord, MA* where you have negative download speed?</p>
             <h3><i>Look no further!</i></h3>
+            <div class="button-container">
+                <button class="test-button" onclick="getUserIP()">Get IP Address & Location</button>
+                <p id="user-ip"></p>
+                <p id="user-location"></p>
+            </div>
         </div>
         <div class="center-hr">
             <hr>
