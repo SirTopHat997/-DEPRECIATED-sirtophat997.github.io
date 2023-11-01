@@ -51,21 +51,6 @@
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
-        .button-container {
-            text-align: center;
-        }
-        .test-button {
-            background-color: #54C6FF;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .test-button:hover {
-            background-color: #3498db;
-        }
         .content {
             padding-left: 20px;
             text-align: center;
@@ -79,6 +64,11 @@
         .results {
             text-align: center;
             margin-top: 20px;
+        }
+        #location-map {
+            height: 300px;
+            width: 100%;
+            background: #f0f0f0;
         }
     </style>
     <script>
@@ -112,9 +102,6 @@
                 map: map,
                 title: 'User Location',
             });
-
-            // Show IP address and location information after the map loads
-            document.getElementById('user-info').style.display = 'block';
         }
     </script>
 </head>
@@ -140,18 +127,8 @@
         <div class="bubble">
             <h2>Location Map</h2>
             <p>This bubble contains a map showing your location based on your IP address.</p>
-            <div id="location-map" style="height: 300px; width: 100%; background: #f0f0f0;"></div>
-        </div>
-        <div class="bubble">
-            <h2>IP Address & Location</h2>
-            <p>Click the button below to reveal your IP address and public location.</p>
-            <div id="user-info" style="display: block;">
-                <p id="user-ip"></p>
-                <p id="user-location"></p>
-            </div>
-            <div class="button-container">
-                <button class="test-button" onclick="showUserLocation()">Show IP Address</button>
-            </div>
+            <div id="location-map"></div>
+            <p id="user-ip"></p>
         </div>
     </div>
     <div class="footer">
