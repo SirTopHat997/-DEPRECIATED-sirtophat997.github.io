@@ -15,9 +15,6 @@
             text-align: center;
             padding: 20px;
         }
-        h1 {
-            margin: 20px;
-        }
         p {
             text-align: center;
             font-size: 18px;
@@ -55,7 +52,9 @@
 </head>
 <body>
     <header>
-        <h1><a href="https://sirtophat997.github.io" style="color:black" >Internet Speed Test</a></h1>
+        <a href="https://sirtophat997.github.io">
+            <img id="site-logo" src="https://photos.google.com/photo/AF1QipNCwRqFx9hw7iy_LvJVyVLZD0bhpitSZWFs9tv8" alt="Internet Speed Test" width="200">
+        </a>
     </header>
     <div class="container">
         <p>Have unruly internet? Maybe you live in CONCORD, MA where you have negative download speed?</p>
@@ -69,5 +68,11 @@
     <div class="footer">
         This aint pretty but it <a href="https://media.tenor.com/V6msBbZABZwAAAAC/spongebob-done.gif" target="_blank" >gets the job done.</a>
     </div>
+    <script>
+        // Add a click event listener to the site logo
+        document.getElementById("site-logo").addEventListener("click", function() {
+            window.location.href = "https://sirtophat997.github.io";
+        });
+    </script>
 </body>
 </html>
