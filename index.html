@@ -40,9 +40,19 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             border-radius: 15px;
         }
+        .bubble-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .bubble {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
         .button-container {
             text-align: center;
-            margin-top: 20px;
         }
         .test-button {
             background-color: #54C6FF;
@@ -70,39 +80,41 @@
             text-align: center;
             margin-top: 20px;
         }
-        .bubble {
-            background-color: #fff;
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
     </style>
     <script>
-        function getUserIP() {
+        window.onload = function () {
+            showUserLocation();
+        };
+
+        function showUserLocation() {
             fetch('https://ipapi.co/json/')
                 .then(response => response.json())
                 .then(data => {
-                    const ip = data.ip;
-                    const city = data.city;
-                    const region = data.region;
-                    const country = data.country_name;
-                    const location = `${city}, ${region}, ${country}`;
-                    document.getElementById('user-ip').innerText = `Your IP Address: ${ip}`;
-                    document.getElementById('user-location').innerText = `Your Public Location: ${location}`;
+                    const latitude = parseFloat(data.latitude);
+                    const longitude = parseFloat(data.longitude);
+                    showMap(latitude, longitude);
+                    document.getElementById('user-ip').textContent = `Your IP Address: ${data.ip}`;
                 })
                 .catch(error => {
                     console.error('Error fetching IP data: ', error);
                 });
         }
 
-        function getBrowserInfo() {
-            const browserInfo = `Browser: ${navigator.userAgent}`;
-            document.getElementById('browser-info').innerText = browserInfo;
-        }
+        function showMap(latitude, longitude) {
+            const mapDiv = document.getElementById('location-map');
+            const map = new google.maps.Map(mapDiv, {
+                center: { lat: latitude, lng: longitude },
+                zoom: 12,
+            });
 
-        function refreshBrowserInfo() {
-            getBrowserInfo();
+            const marker = new google.maps.Marker({
+                position: { lat: latitude, lng: longitude },
+                map: map,
+                title: 'User Location',
+            });
+
+            // Show IP address and location information after the map loads
+            document.getElementById('user-info').style.display = 'block';
         }
     </script>
 </head>
@@ -114,11 +126,6 @@
         <div class="content">
             <p>Is your internet feeling slow? Are you in *Concord, MA* where you have negative download speed?</p>
             <h3><i>Look no further!</i></h3>
-            <div class="button-container">
-                <button class="test-button" onclick="getUserIP()">Get IP Address & Location</button>
-                <p id="user-ip"></p>
-                <p id="user-location"></p>
-            </div>
         </div>
         <div class="center-hr">
             <hr>
@@ -128,22 +135,29 @@
             <iframe style="border:none;position:absolute;top:0;left:0;width:100%;height:100%;min-height:160px;border:none !important;" src="//openspeedtest.com/speedtest"></iframe>
         </div>
         <!-- OST Widget code end -->
-        <div class="content">
-            <div class="button-container">
-                <button class="test-button" onclick="refreshBrowserInfo()">Refresh Browser Info</button>
-                <div class="results">
-                    <p id="browser-info"></p>
-                </div>
-            </div>
+    </div>
+    <div class="bubble-container">
+        <div class="bubble">
+            <h2>Location Map</h2>
+            <p>This bubble contains a map showing your location based on your IP address.</p>
+            <div id="location-map" style="height: 300px; width: 100%; background: #f0f0f0;"></div>
         </div>
         <div class="bubble">
-            <h2>New Feature</h2>
-            <p>This is a new feature in a bubble. You can add more content, buttons, or utilities here as needed.</p>
-            <button class="test-button">Click Me</button>
+            <h2>IP Address & Location</h2>
+            <p>Click the button below to reveal your IP address and public location.</p>
+            <div id="user-info" style="display: block;">
+                <p id="user-ip"></p>
+                <p id="user-location"></p>
+            </div>
+            <div class="button-container">
+                <button class="test-button" onclick="showUserLocation()">Show IP Address</button>
+            </div>
         </div>
     </div>
     <div class="footer">
         This page may not be fancy, but it <a href="https://media.tenor.com/V6msBbZABZwAAAAC/spongebob-done.gif" target="_blank">gets the job done.</a>
     </div>
+    <!-- Include the Google Maps API script here -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCP4kQpgBNiZfE-5gVgc_pxKF1FhRfC8oo&callback=initMap" async defer></script>
 </body>
 </html>
