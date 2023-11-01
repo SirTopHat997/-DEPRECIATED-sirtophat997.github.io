@@ -5,33 +5,42 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
         }
+
         header {
             background-color: #3498db;
             color: #fff;
-            text-align: left;
+            text-align: center;
             padding: 20px;
             border-radius: 0 0 15px 15px;
         }
+
         h1 {
+            font-family: 'Arial', sans-serif;
+            font-size: 36px;
             margin: 20px;
         }
+
         p {
             text-align: center;
-            font-size: 16px;
+            font-size: 18px;
+            color: #333;
         }
+
         iframe {
             display: block;
             margin: 0 auto;
         }
+
         .footer {
             text-align: right;
             padding: 10px;
             font-size: 14px;
         }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -40,44 +49,55 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             border-radius: 15px;
         }
+
         .bubble-container {
             display: flex;
-            justify-content: center; /* Center-align the bubble */
+            justify-content: center;
             margin-top: 20px;
         }
+
         .bubble {
-            background-color: #fff;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            text-align: center; /* Center-align the content inside the bubble */
+            text-align: center;
         }
+
         .content {
             padding-left: 20px;
             text-align: center;
         }
+
         h2 {
             font-size: 24px;
+            color: #333;
         }
+
         .center-hr {
             text-align: center;
         }
+
         .results {
             text-align: center;
             margin-top: 20px;
         }
+
         #location-map {
             height: 300px;
             width: 100%;
             background: #f0f0f0;
         }
     </style>
+
     <script>
         window.onload = function () {
             showUserLocation();
         };
 
         function showUserLocation() {
+            // Fetch user's IP and location data
             fetch('https://ipapi.co/json/')
                 .then(response => response.json())
                 .then(data => {
@@ -98,6 +118,7 @@
                 zoom: 12,
             });
 
+            // Add a marker on the map to indicate user location
             const marker = new google.maps.Marker({
                 position: { lat: latitude, lng: longitude },
                 map: map,
@@ -110,32 +131,42 @@
     <header>
         <h1><a href="https://sirtophat997.github.io" style="color:white">Internet Speed Test</a></h1>
     </header>
-    <div class="container">
-        <div class="content">
+
+    <div class="bubble-container">
+        <!-- First Bubble: Internet Speed Test -->
+        <div class="bubble">
+            <!-- Introduction text -->
             <p>Is your internet feeling slow? Are you in *Concord, MA* where you have negative download speed?</p>
             <h3><i>Look no further!</i></h3>
+
+            <!-- Internet Speed Test Embed -->
+            <div style="width:100%;height:0;padding-bottom:50%;position:relative;">
+                <iframe style="border:none;position:absolute;top:0;left:0;width:100%;height:100%;min-height:160px;border:none !important;" src="//openspeedtest.com/speedtest"></iframe>
+            </div>
         </div>
+        <!-- Centered horizontal line -->
         <div class="center-hr">
             <hr>
         </div>
-        <!-- OST Widget code start -->
-        <div style="width:100%;height:0;padding-bottom:50%;position:relative;">
-            <iframe style="border:none;position:absolute;top:0;left:0;width:100%;height:100%;min-height:160px;border:none !important;" src="//openspeedtest.com/speedtest"></iframe>
-        </div>
-        <!-- OST Widget code end -->
     </div>
+
     <div class="bubble-container">
+        <!-- Second Bubble: Location Map -->
         <div class="bubble">
             <h2>Location Map</h2>
             <p>This bubble contains a map showing your location based on your IP address.</p>
+            <!-- Google Maps location map -->
             <div id="location-map"></div>
+            <!-- User's IP Address -->
             <p id="user-ip"></p>
         </div>
     </div>
+
     <div class="footer">
         This page may not be fancy, but it <a href="https://media.tenor.com/V6msBbZABZwAAAAC/spongebob-done.gif" target="_blank">gets the job done.</a>
     </div>
-    <!-- Include the Google Maps API script here -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCP4kQpgBNiZfE-5gVgc_pxKF1FhRfC8oo&callback=initMap" async defer></script>
+
+    <!-- Include the Google Maps API script here with your API key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCP4kQpgBNiZfE-5gVgc_pxKF1FhRfC8oo&callback=initMap" async defer></script>
 </body>
 </html>
